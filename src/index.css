@@ -19,3 +19,10 @@ main { padding: 24px; max-width: 1000px; margin: 0 auto; }
 .notes form input { flex: 1; }
 .notes ul { list-style: none; padding: 0; display: grid; gap: 8px; }
 .notes li { display: flex; justify-content: space-between; padding: 10px 12px; border: 1px solid #8884; border-radius: 8px; }
+.links form { display: grid; gap: 8px; margin-bottom: 16px; }
+.links input, .links button { font: inherit; padding: 8px; }
+.links .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.links .tags .active { font-weight: 700; text-decoration: underline; }
+.links ul { list-style: none; padding: 0; display: grid; gap: 8px; }
+.links li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid #8884; border-radius: 8px; }
+.links li div { display: flex; flex-direction: column; min-width: 0; overflow-wrap: anywhere; }
