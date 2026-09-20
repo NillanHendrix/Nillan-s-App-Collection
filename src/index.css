@@ -1,0 +1,21 @@
+:root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+body { margin: 0; }
+.header { display: flex; align-items: center; gap: 16px; padding: 0 16px; height: 52px; border-bottom: 1px solid #8884; position: sticky; top: 0; background: Canvas; }
+.header nav { display: flex; gap: 4px; flex: 1; overflow-x: auto; }
+.header a { padding: 6px 12px; border-radius: 8px; text-decoration: none; color: inherit; white-space: nowrap; }
+.header nav a.active { background: #8883; font-weight: 600; }
+.header .brand { font-weight: 700; padding-left: 0; }
+.user { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+main { padding: 24px; max-width: 1000px; margin: 0 auto; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+.card { display: flex; flex-direction: column; gap: 4px; padding: 20px; border: 1px solid #8884; border-radius: 12px; text-decoration: none; color: inherit; }
+.card .icon { font-size: 32px; }
+.login { display: flex; flex-direction: column; gap: 10px; max-width: 320px; margin: 15vh auto; padding: 0 16px; }
+.login input, .login button, .user button { padding: 8px 12px; font: inherit; }
+.login .link { background: none; border: none; text-decoration: underline; cursor: pointer; }
+.error pre { white-space: pre-wrap; }
+.notes textarea, .notes input { font: inherit; padding: 8px; }
+.notes form { display: flex; gap: 8px; margin-bottom: 16px; }
+.notes form input { flex: 1; }
+.notes ul { list-style: none; padding: 0; display: grid; gap: 8px; }
+.notes li { display: flex; justify-content: space-between; padding: 10px 12px; border: 1px solid #8884; border-radius: 8px; }
