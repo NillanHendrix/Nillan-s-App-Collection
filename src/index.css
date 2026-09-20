@@ -26,3 +26,11 @@ main { padding: 24px; max-width: 1000px; margin: 0 auto; }
 .links ul { list-style: none; padding: 0; display: grid; gap: 8px; }
 .links li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid #8884; border-radius: 8px; }
 .links li div { display: flex; flex-direction: column; min-width: 0; overflow-wrap: anywhere; }
+.monitor form { display: grid; gap: 8px; margin-bottom: 16px; }
+.monitor input, .monitor select, .monitor button { font: inherit; padding: 8px; }
+.monitor ul { list-style: none; padding: 0; display: grid; gap: 8px; }
+.monitor li { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid #8884; border-radius: 8px; }
+.monitor li div { display: flex; flex-direction: column; flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.monitor .dot { width: 12px; height: 12px; border-radius: 50%; background: #888; flex: none; }
+.monitor .dot.up { background: #2ea043; }
+.monitor .dot.down { background: #d1242f; }
