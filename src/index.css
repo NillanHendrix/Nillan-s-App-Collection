@@ -1,10 +1,19 @@
 :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
 body { margin: 0; }
 .header { display: flex; align-items: center; gap: 16px; padding: 0 16px; height: 52px; border-bottom: 1px solid #8884; position: sticky; top: 0; background: Canvas; }
-.header nav { display: flex; gap: 4px; flex: 1; overflow-x: auto; }
-.header a { padding: 6px 12px; border-radius: 8px; text-decoration: none; color: inherit; white-space: nowrap; }
-.header nav a.active { background: #8883; font-weight: 600; }
-.header .brand { font-weight: 700; padding-left: 0; }
+.header { z-index: 10; }
+.header a { text-decoration: none; color: inherit; white-space: nowrap; }
+.header .brand { font-weight: 700; }
+.appmenu { position: relative; flex: 1; }
+.appmenu .trigger { font: inherit; padding: 6px 12px; border: 1px solid #8884; border-radius: 8px; background: none; color: inherit; cursor: pointer; }
+.appmenu .popover { position: absolute; top: calc(100% + 6px); left: 0; width: min(320px, calc(100vw - 32px)); padding: 8px; background: Canvas; border: 1px solid #8886; border-radius: 10px; box-shadow: 0 8px 24px #0003; }
+.appmenu .popover input { box-sizing: border-box; width: 100%; font: inherit; padding: 8px; margin-bottom: 6px; }
+.appmenu .popover ul { list-style: none; margin: 0; padding: 0; max-height: 50vh; overflow-y: auto; }
+.appmenu .popover li { padding: 8px 10px; border-radius: 6px; cursor: pointer; }
+.appmenu .popover li.active { background: #8883; }
+.appmenu .popover li[aria-selected="true"] { font-weight: 600; }
+.appmenu .popover li small { opacity: .6; margin-left: 4px; }
+.appmenu .popover li.empty { cursor: default; opacity: .6; }
 .user { display: flex; align-items: center; gap: 8px; font-size: 14px; }
 main { padding: 24px; max-width: 1000px; margin: 0 auto; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
