@@ -43,3 +43,23 @@ main { padding: 24px; max-width: 1000px; margin: 0 auto; }
 .monitor .dot { width: 12px; height: 12px; border-radius: 50%; background: #888; flex: none; }
 .monitor .dot.up { background: #2ea043; }
 .monitor .dot.down { background: #d1242f; }
+.about { display: grid; grid-template-columns: 200px 1fr; gap: 16px; }
+.about aside ul { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 4px; }
+.about aside button { font: inherit; padding: 6px 8px; width: 100%; text-align: left; }
+.about aside button.active { font-weight: 700; }
+.about .toolbar { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+.about .toolbar button { font: inherit; padding: 6px 10px; }
+.about .status { margin-left: auto; opacity: .6; font-size: .85em; }
+.about .panes { display: grid; gap: 16px; }
+.about .panes.split { grid-template-columns: 1fr 1fr; }
+.about textarea { font: 14px/1.5 ui-monospace, monospace; padding: 10px; min-height: 60vh; resize: vertical; }
+.about .preview { min-width: 0; overflow-wrap: anywhere; }
+.about .preview pre { padding: 10px; border: 1px solid #8884; border-radius: 8px; overflow-x: auto; }
+.about .preview code { background: #8882; padding: 1px 4px; border-radius: 4px; }
+.about .preview pre code { background: none; padding: 0; }
+.about .preview blockquote { margin: 8px 0; padding-left: 12px; border-left: 3px solid #8886; opacity: .85; }
+.about .preview a.missing { opacity: .6; text-decoration-style: dashed; }
+@media (max-width: 700px) {
+  .about { grid-template-columns: 1fr; }
+  .about .panes.split { grid-template-columns: 1fr; }
+}
