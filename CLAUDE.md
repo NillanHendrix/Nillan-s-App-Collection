@@ -21,6 +21,8 @@ Setup: copy `.env.example` to `.env` and set `VITE_SUPABASE_URL` and `VITE_SUPAB
 
 **Shell and routing.** `src/App.tsx`: `AuthProvider` → `BrowserRouter`; `/login` is public, everything else sits under `RequireAuth` → `Layout` (header with `AppMenu` dropdown) with `/` = `Home` and `apps/:appId/*` = `AppHost`. `AppHost` looks up the manifest by URL param (unknown id redirects to `/`) and renders the lazy component inside an `ErrorBoundary` (keyed by app id) and `Suspense`. Apps may use their own nested routes under `apps/:appId/*`.
 
+**Header menu.** `Header` (brand link, `AppMenu`, user email + sign-out) is rendered by `Layout`. `AppMenu` is a searchable dropdown over `apps` from the registry (keyboard navigable, highlights the current app via `useMatch('/apps/:appId/*')`).
+
 **Auth.** Supabase auth session lives in `AuthProvider` context (`useAuth()` → `{ session, loading }`). Apps use the shared client from `src/lib/supabase.ts`.
 
 **Deploy/chunk handling.** `src/main.tsx` handles `vite:preloadError` by reloading once (guarded by a `sessionStorage` flag), since old chunks vanish after a Vercel deploy. `vercel.json` rewrites all routes to `index.html`.
@@ -32,3 +34,11 @@ Setup: copy `.env.example` to `.env` and set `VITE_SUPABASE_URL` and `VITE_SUPAB
 3. Data tables: prefix `<id>_`, include `user_id uuid not null default auth.uid() references auth.users(id) on delete cascade`, enable RLS with an own-rows policy for `all` (see `supabase/migrations/0003_monitor.sql`). Add as a new numbered file `supabase/migrations/000N_<id>.sql`.
 
 Note: the `monitor` app runs checks client-side in the browser (`checks.ts`): websites via a `no-cors` fetch (only reachability, no status code) and Minecraft via the public mcsrvstat.us API, since browsers can't open TCP connections.
+
+## Conventions
+
+- Apps talk to Supabase directly from `App.tsx` via `supabase.from('<id>_<table>')` (no shared data layer); RLS scopes rows to the user, and `user_id` is filled by its DB default, so inserts don't send it.
+- Styling is one global stylesheet, `src/index.css`, with per-app root class selectors (e.g. `.notes`); there is no CSS-in-JS or component library. It follows the system light/dark scheme (`color-scheme: light dark`, `Canvas`).
+- TypeScript is `strict`; `tsc -b` runs before `vite build`, so type errors fail the build (and the Vercel deploy).
+- Existing apps: `notes` (order 10), `links` (15), `counter` (20, no DB table), `monitor` (25), and `about` (40) (a wiki-style Markdown editor with `[[wikilinks]]`, autosave, and a small self-written renderer in `markdown.ts` that escapes HTML first; table `about_pages`, `0004_about.sql`). Migrations are `0001_notes` through `0004_about`, and the next number is `0005`.
+- `.claude` and `.env` are gitignored; `dist/` is build output.
