@@ -1,0 +1,34 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Overview
+
+"Everything App": a single-page shell (React 19 + Vite + TypeScript + Supabase, deployed on Vercel) that hosts multiple independent mini-apps under `/apps/<id>` and switches between them without a page reload. UI strings and code comments are in German.
+
+## Commands
+
+- `npm install`
+- `npm run dev` — Vite dev server
+- `npm run build` — `tsc -b && vite build` (the type check is the only static check; there is no linter or test suite)
+- `npm run preview` — serve the production build
+
+Setup: copy `.env.example` to `.env` and set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`. `src/lib/supabase.ts` throws at startup if they are missing. Database migrations in `supabase/migrations/` are run manually in the Supabase SQL editor (no CLI tooling).
+
+## Architecture
+
+**Auto-discovered app registry.** `src/registry/index.ts` uses `import.meta.glob('../apps/*/manifest.ts', { eager: true })` to collect every app's `AppManifest` (`src/registry/types.ts`), sorted by `order` then name. The shell never imports apps by name, so adding an app requires no shell changes. Manifests are loaded eagerly, but each `manifest.component` is `lazy(() => import('./App'))`, so every app is its own chunk.
+
+**Shell and routing.** `src/App.tsx`: `AuthProvider` → `BrowserRouter`; `/login` is public, everything else sits under `RequireAuth` → `Layout` (header with `AppMenu` dropdown) with `/` = `Home` and `apps/:appId/*` = `AppHost`. `AppHost` looks up the manifest by URL param (unknown id redirects to `/`) and renders the lazy component inside an `ErrorBoundary` (keyed by app id) and `Suspense`. Apps may use their own nested routes under `apps/:appId/*`.
+
+**Auth.** Supabase auth session lives in `AuthProvider` context (`useAuth()` → `{ session, loading }`). Apps use the shared client from `src/lib/supabase.ts`.
+
+**Deploy/chunk handling.** `src/main.tsx` handles `vite:preloadError` by reloading once (guarded by a `sessionStorage` flag), since old chunks vanish after a Vercel deploy. `vercel.json` rewrites all routes to `index.html`.
+
+## Adding or changing an app
+
+1. Create `src/apps/<id>/manifest.ts` (`id` must equal the folder name, and becomes the URL segment) and `src/apps/<id>/App.tsx` with a default-exported component. Copy an existing manifest for the shape.
+2. Bump `version` in the manifest when shipping a change to that app (release convention from the README).
+3. Data tables: prefix `<id>_`, include `user_id uuid not null default auth.uid() references auth.users(id) on delete cascade`, enable RLS with an own-rows policy for `all` (see `supabase/migrations/0003_monitor.sql`). Add as a new numbered file `supabase/migrations/000N_<id>.sql`.
+
+Note: the `monitor` app runs checks client-side in the browser (`checks.ts`): websites via a `no-cors` fetch (only reachability, no status code) and Minecraft via the public mcsrvstat.us API, since browsers can't open TCP connections.
