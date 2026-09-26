@@ -63,6 +63,7 @@ main { padding: 24px; max-width: 1000px; margin: 0 auto; }
   .about { grid-template-columns: 1fr; }
   .about .panes.split { grid-template-columns: 1fr; }
 }
+<<<<<<< HEAD
 .wow form { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
 .wow form input:not([type="checkbox"]) { flex: 1; min-width: 160px; }
 .wow input, .wow select, .wow button { font: inherit; padding: 8px; }
@@ -98,3 +99,31 @@ main { padding: 24px; max-width: 1000px; margin: 0 auto; }
 @media (max-width: 700px) {
   .wow .hero .render { display: none; }
 }
+=======
+
+.todo .stats { display: flex; gap: 20px; flex-wrap: wrap; margin: 16px 0 20px; }
+.todo .stat { display: flex; flex-direction: column; gap: 4px; min-width: 120px; }
+.todo .stat .big { font-size: 22px; font-weight: 700; }
+.todo .stat small { opacity: .6; }
+.todo .stat.level { min-width: 180px; }
+.todo .badge { align-self: flex-start; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: linear-gradient(135deg, #f6b93b, #e58e26); color: #1a1a1a; }
+.todo .bar { height: 8px; border-radius: 999px; background: #8883; overflow: hidden; }
+.todo .bar .fill { height: 100%; background: linear-gradient(90deg, #38ada9, #78e08f); transition: width .3s ease; }
+.todo .tabs { display: flex; gap: 8px; margin-bottom: 16px; border-bottom: 1px solid #8884; }
+.todo .tabs button { font: inherit; padding: 8px 14px; border: none; background: none; color: inherit; cursor: pointer; opacity: .6; border-bottom: 2px solid transparent; }
+.todo .tabs button.active { opacity: 1; border-bottom-color: currentColor; font-weight: 700; }
+.todo form { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.todo form input, .todo form select, .todo form button { font: inherit; padding: 8px; }
+.todo form input[placeholder="Neue Quest…"], .todo form input[placeholder="Neue Belohnung…"] { flex: 1; min-width: 160px; }
+.todo ul.quests, .todo ul.rewards, .todo ul.history { list-style: none; padding: 0; display: grid; gap: 8px; margin: 0; }
+.todo ul.quests li, .todo ul.rewards li, .todo ul.history li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid #8884; border-radius: 8px; }
+.todo ul.quests li label { display: flex; align-items: center; gap: 10px; min-width: 0; overflow-wrap: anywhere; }
+.todo ul.quests.done li span { text-decoration: line-through; opacity: .6; }
+.todo .right { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.todo .points { font-weight: 700; opacity: .8; }
+.todo li.empty { opacity: .6; justify-content: center; border-style: dashed; }
+.todo details { margin-top: 16px; }
+.todo details summary { cursor: pointer; margin-bottom: 8px; opacity: .8; }
+.todo .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); padding: 10px 18px; border-radius: 999px; background: #222; color: #fff; font-weight: 600; box-shadow: 0 8px 24px #0004; animation: todo-toast .2s ease; }
+@keyframes todo-toast { from { opacity: 0; transform: translate(-50%, 10px); } to { opacity: 1; transform: translate(-50%, 0); } }
+>>>>>>> 43a9023f6f8dbd575519012bac9e389c62321420
