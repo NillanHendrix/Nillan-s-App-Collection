@@ -6,7 +6,7 @@ const manifest: AppManifest = {
   name: 'WoW Companion',
   icon: '⚔️',
   version: '1.0.0',
-  order: 30,
+  order: 35,
   component: lazy(() => import('./App')),
 }
 

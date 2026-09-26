@@ -63,7 +63,6 @@ main { padding: 24px; max-width: 1000px; margin: 0 auto; }
   .about { grid-template-columns: 1fr; }
   .about .panes.split { grid-template-columns: 1fr; }
 }
-<<<<<<< HEAD
 .wow form { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
 .wow form input:not([type="checkbox"]) { flex: 1; min-width: 160px; }
 .wow input, .wow select, .wow button { font: inherit; padding: 8px; }
@@ -99,7 +98,6 @@ main { padding: 24px; max-width: 1000px; margin: 0 auto; }
 @media (max-width: 700px) {
   .wow .hero .render { display: none; }
 }
-=======
 
 .todo .stats { display: flex; gap: 20px; flex-wrap: wrap; margin: 16px 0 20px; }
 .todo .stat { display: flex; flex-direction: column; gap: 4px; min-width: 120px; }
@@ -126,4 +124,3 @@ main { padding: 24px; max-width: 1000px; margin: 0 auto; }
 .todo details summary { cursor: pointer; margin-bottom: 8px; opacity: .8; }
 .todo .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); padding: 10px 18px; border-radius: 999px; background: #222; color: #fff; font-weight: 600; box-shadow: 0 8px 24px #0004; animation: todo-toast .2s ease; }
 @keyframes todo-toast { from { opacity: 0; transform: translate(-50%, 10px); } to { opacity: 1; transform: translate(-50%, 0); } }
->>>>>>> 43a9023f6f8dbd575519012bac9e389c62321420
