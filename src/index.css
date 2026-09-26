@@ -63,3 +63,38 @@ main { padding: 24px; max-width: 1000px; margin: 0 auto; }
   .about { grid-template-columns: 1fr; }
   .about .panes.split { grid-template-columns: 1fr; }
 }
+.wow form { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.wow form input:not([type="checkbox"]) { flex: 1; min-width: 160px; }
+.wow input, .wow select, .wow button { font: inherit; padding: 8px; }
+.wow form label { display: flex; align-items: center; gap: 4px; }
+.wow .chars { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.wow .chars li { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border: 1px solid #8884; border-left: 4px solid #8884; border-radius: 12px; }
+.wow .chars a { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; text-decoration: none; color: inherit; }
+.wow .chars a div { display: flex; flex-direction: column; min-width: 0; overflow-wrap: anywhere; }
+.wow .chars img, .wow .chars .avatar { width: 56px; height: 56px; border-radius: 8px; flex: none; background: #8882; }
+.wow .hero { display: flex; align-items: center; gap: 16px; padding: 12px 16px; border: 1px solid #8884; border-left: 6px solid #8884; border-radius: 12px; overflow: hidden; }
+.wow .hero > img:first-child { width: 84px; height: 84px; border-radius: 10px; flex: none; }
+.wow .hero div { flex: 1; min-width: 0; }
+.wow .hero h1 { margin: 0 0 4px; text-transform: capitalize; }
+.wow .hero p { margin: 2px 0; }
+.wow .hero .render { height: 160px; margin: -12px -16px -12px 0; object-fit: cover; object-position: center 20%; width: 220px; flex: none; }
+.wow .extlinks { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.wow .extlinks a { padding: 6px 10px; border: 1px solid #8884; border-radius: 8px; text-decoration: none; color: inherit; }
+.wow .tabs { display: flex; gap: 4px; border-bottom: 1px solid #8884; margin-bottom: 12px; overflow-x: auto; }
+.wow .tabs button { background: none; border: none; border-bottom: 2px solid transparent; color: inherit; cursor: pointer; }
+.wow .tabs button.active { border-bottom-color: currentColor; font-weight: 700; }
+.wow table { border-collapse: collapse; width: 100%; }
+.wow th, .wow td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #8883; }
+.wow .list { list-style: none; padding: 0; display: grid; gap: 8px; }
+.wow .list li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 12px; border: 1px solid #8884; border-radius: 8px; }
+.wow .list li.done { opacity: .6; }
+.wow .list li label { display: flex; align-items: center; gap: 8px; }
+.wow .list li div { display: flex; flex-direction: column; min-width: 0; overflow-wrap: anywhere; }
+.wow .list small { opacity: .7; }
+.wow .search { box-sizing: border-box; width: 100%; margin-bottom: 8px; }
+.wow .matches { margin-bottom: 16px; }
+.wow .spark { margin: 0 0 16px; }
+.wow .spark svg { display: block; width: 100%; height: 60px; border: 1px solid #8883; border-radius: 8px; }
+@media (max-width: 700px) {
+  .wow .hero .render { display: none; }
+}

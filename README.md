@@ -40,4 +40,6 @@ Datenbanktabellen bekommen das Präfix `<id>_`, eine `user_id uuid default auth.
 
 ## Deployment auf Vercel
 
-Repo importieren (Framework: Vite), Env-Vars `VITE_SUPABASE_URL` und `VITE_SUPABASE_ANON_KEY` setzen. `vercel.json` leitet alle Routen auf `index.html` um.
+Repo importieren (Framework: Vite), Env-Vars `VITE_SUPABASE_URL` und `VITE_SUPABASE_ANON_KEY` setzen. `vercel.json` leitet alle Routen außer `/api/*` auf `index.html` um.
+
+Für die WoW-App (`wow`) zusätzlich `BLIZZARD_CLIENT_ID` und `BLIZZARD_CLIENT_SECRET` setzen (API-Client unter https://develop.battle.net anlegen). Die Blizzard API läuft über die Vercel Function `api/wow.ts`; lokal entweder `npx vercel dev` nutzen oder in `.env` `API_PROXY_TARGET` auf ein Deployment setzen.

@@ -25,7 +25,9 @@ Setup: copy `.env.example` to `.env` and set `VITE_SUPABASE_URL` and `VITE_SUPAB
 
 **Auth.** Supabase auth session lives in `AuthProvider` context (`useAuth()` → `{ session, loading }`). Apps use the shared client from `src/lib/supabase.ts`.
 
-**Deploy/chunk handling.** `src/main.tsx` handles `vite:preloadError` by reloading once (guarded by a `sessionStorage` flag), since old chunks vanish after a Vercel deploy. `vercel.json` rewrites all routes to `index.html`.
+**Deploy/chunk handling.** `src/main.tsx` handles `vite:preloadError` by reloading once (guarded by a `sessionStorage` flag), since old chunks vanish after a Vercel deploy. `vercel.json` rewrites all routes except `/api/*` to `index.html`.
+
+**Serverless API.** `api/` holds Vercel Functions (Web-standard `export async function GET(request: Request)`). They are outside the `tsconfig` `include`, so `tsc -b` doesn't check them; Vercel compiles them. `api/wow.ts` proxies the Blizzard API: it verifies the caller's Supabase access token (`Authorization: Bearer`, checked via `/auth/v1/user`), only allows whitelisted regions/namespaces/paths, and caches the OAuth client-credentials token in module scope. Server-only env vars: `BLIZZARD_CLIENT_ID`, `BLIZZARD_CLIENT_SECRET`. `npm run dev` has no functions; set `API_PROXY_TARGET` in `.env` (Vite proxies `/api` there) or use `npx vercel dev`.
 
 ## Adding or changing an app
 
@@ -40,5 +42,5 @@ Note: the `monitor` app runs checks client-side in the browser (`checks.ts`): we
 - Apps talk to Supabase directly from `App.tsx` via `supabase.from('<id>_<table>')` (no shared data layer); RLS scopes rows to the user, and `user_id` is filled by its DB default, so inserts don't send it.
 - Styling is one global stylesheet, `src/index.css`, with per-app root class selectors (e.g. `.notes`); there is no CSS-in-JS or component library. It follows the system light/dark scheme (`color-scheme: light dark`, `Canvas`).
 - TypeScript is `strict`; `tsc -b` runs before `vite build`, so type errors fail the build (and the Vercel deploy).
-- Existing apps: `notes` (order 10), `links` (15), `counter` (20, no DB table), `monitor` (25), and `about` (40) (a wiki-style Markdown editor with `[[wikilinks]]`, autosave, and a small self-written renderer in `markdown.ts` that escapes HTML first; table `about_pages`, `0004_about.sql`). Migrations are `0001_notes` through `0004_about`, and the next number is `0005`.
+- Existing apps: `notes` (order 10), `links` (15), `counter` (20, no DB table), `monitor` (25), `wow` (30) (WoW companion: characters, Mythic+, weekly checklist, ilvl/rating history, tracked achievements via `api/wow.ts`; nested routes `apps/wow/:charId`; tables `wow_characters`, `wow_snapshots`, `wow_goals`, `wow_achievements`, `0005_wow.sql`), and `about` (40) (a wiki-style Markdown editor with `[[wikilinks]]`, autosave, and a small self-written renderer in `markdown.ts` that escapes HTML first; table `about_pages`, `0004_about.sql`). Migrations are `0001_notes` through `0005_wow`, and the next number is `0006`.
 - `.claude` and `.env` are gitignored; `dist/` is build output.
